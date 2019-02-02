@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
-// import P5Wrapper from 'react-p5-wrapper';
+import P5Wrapper from 'react-p5-wrapper';
+import * as p5 from 'p5';
+import "p5/lib/addons/p5.dom";
 import logo from './logo.svg';
 import './App.css';
-import Viewer from './Viewer';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <Viewer />
+        <P5Wrapper sketch={sketch} />
       </div>
     );
   }
@@ -32,7 +19,8 @@ export function sketch (p) {
   let rotation = 0;
 
   p.setup = function () {
-    p.createCanvas(1000, 1000, p.WEBGL);
+    p.createCanvas(300,300,);
+    p.createCapture(p5.VIDEO);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
