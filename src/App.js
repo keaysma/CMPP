@@ -3,9 +3,13 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Viewer from './Viewer';
+import { Noiser, jukebox } from './Noiser';
 
 class App extends Component {
   render() {
+	this.o = jukebox();
+	this.o.start();
+	console.log(this.o);
     return (
       <div className="App">
         <header className="App-header">
@@ -21,6 +25,8 @@ class App extends Component {
           >
             Learn React
           </a>
+		  <button onClick={() => this.o.amp(0)}>F</button>
+		  <button onClick={() => this.o.amp(1)}>Fnt</button>
         </header>
         <Viewer />
       </div>
