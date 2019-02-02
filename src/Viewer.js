@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import crosshair from './assets/crosshair.png';
 
 class Viewer extends Component {
   render() {
     return (
       <div className="Viewer">
-        <h1>yeet</h1>
+        <img src={crosshair} height="50" width="50" alt='X' />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import P5Wrapper from 'react-p5-wrapper';
-import logo from './logo.svg';
-import './App.css';
+import logo from './assets/logo.svg';
+import './static/App.css';
 import Viewer from './Viewer';
 
 class App extends Component {
