@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Audio, Camera, Permissions } from 'expo';
 
 export default class App extends React.Component {
   state = {
@@ -14,6 +14,12 @@ export default class App extends React.Component {
   }
 
   render() {
+	const soundObject = new Audio.Sound();
+
+	try {
+		soundObject.loadAsync(require('./test.mp3')).then(async () => soundObject.playAsync());
+	} catch (error) {}
+
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
