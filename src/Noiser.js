@@ -63,7 +63,7 @@ export function sketch (p) {
   };
 };
 
-function jukebox(p){
+export function jukebox(p){
 	var o;
 	o = new p5.Oscillator();
 	o.setType('sine');
