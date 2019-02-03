@@ -88,27 +88,5 @@ export function sketch (p) {
     return false;
   };
 }
-//   let rotation = 0;
-
-//   p.setup = function () {
-//     p.createCanvas(1000, 1000, p.WEBGL);
-//     p.createCapture(p5.VIDEO);
-//   };
-
-//   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-//     if (props.rotation){
-//       rotation = props.rotation * Math.PI / 180;
-//     }
-//   };
-
-//   p.draw = function () {
-//     p.background(100);
-//     p.noStroke();
-//     p.push();
-//     p.rotateY(rotation);
-//     p.box(100);
-//     p.pop();
-//   };
-// };
 
 export default Viewer;
