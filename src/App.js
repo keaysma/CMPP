@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
 import p5 from 'p5';
 import logo from './assets/logo.svg';
+// import P5Wrapper from 'react-p5-wrapper';
+// import logo from './assets/logo.svg';
 import './static/App.css';
 import Viewer from './Viewer';
 import { Noiser, jukebox } from './Noiser';
