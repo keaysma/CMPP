@@ -15,9 +15,14 @@ var tune = [
 	{base: 82.41, max: 82.40},		//E2
 	{base: 196.00, max: 196.00},	//G3
 	{base: 130.81, max: 130.80},	//C3
-	{base: 0, max: 10},
-	{base: 0, max: 10},
-	{base: 0, max: 10}
+	//FOR HARMONY -- LAST 3
+	{base: 329.63, max: 0},			//E4
+	{base: 783.99, max: 0},			//G5
+	{base: 1046.50, max: 0},		//C6
+	//FOR MODULATION -- LAST 3
+	//{base: 0, max: 10},
+	//{base: 0, max: 10},
+	//{base: 0, max: 10}
 ];
 
 class AvCanvas extends Component {
@@ -37,12 +42,14 @@ class AvCanvas extends Component {
   initiateBoxes() {
     const waveTypes = ['sine', 'triangle', 'sawtooth'];
     let boxes = []
-    for (let index = 0; index < 3/*this.state.jukeboxes.length*/; index++) {
+	//FOR MODULATION set index < 3
+    for (let index = 0; index < 6; index++) {
       let currbox = {box: jukebox(), rgba: points[index]}
       currbox.box.setType = waveTypes[Math.floor(Math.random()*waveTypes.length)];
       currbox.box.start();
       boxes.push(currbox);
     }
+	//FOR MODULATION
 	/*for (let index = 3; index < 6; index ++){
       let currbox = {box: jukebox(), rgba: points[index]}
       currbox.box.setType = waveTypes[Math.floor(Math.random()*waveTypes.length)];
@@ -71,7 +78,13 @@ class AvCanvas extends Component {
       for (let index = 0; index < this.state.jukeboxes.length; index++) {
         const box = this.state.jukeboxes[index];
         box.rgba = cam.get(points[index].x, points[index].y, 1, 1);
-        let x = tune[index]['base'] + (tune[index]['max']*((box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255)));
+        
+		//FOR HARMONY
+		let x = tune[index]['base']
+		let y = (box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255);
+
+		box.box.amp(y);
+		//let x = tune[index]['base'] + (tune[index]['max']*((box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255)));
         box.box.freq(x);
       }
       //console.log(this.state.jukeboxes);
@@ -137,6 +150,13 @@ export function sketch (p) {
       const point = points[index];
       p.ellipse(point.x, point.y, point.radius, point.radius)
     }
+
+	//FOR MODULATION	
+    /*for (let index = 0; index < points.length/2; index++) {
+      const pointa = points[index];
+	  const pointb = points[index + points.length/2];
+	  p.line(pointa.x, pointa.y, pointb.x, pointb.y)
+    }*/
     //p.filter(p.INVERT);
   };
   p.mousePressed = () => {
