@@ -6,9 +6,7 @@ import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom.js";
 class Viewer extends Component {
   render() {
     return (
-      <div className="App">
         <P5Wrapper sketch={sketch} />
-      </div>
     );
   }
 }
@@ -16,24 +14,28 @@ class Viewer extends Component {
 export function sketch (p) {
   let rotation = 0;
 
+  let video;
+
   p.setup = function () {
-    p.createCanvas(300,300,);
-    p.createCapture(p5.VIDEO);
+    let canvas = p.createCanvas(1, 1);
+    //canvas.parent('root');
+    video = p.createCapture({
+      audio: false,
+      video: {
+        facingMode: "user"
+      }
+    });
+    video.size(p.windowWidth, p.windowHeight);
   };
 
-  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+  /*p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     if (props.rotation){
       rotation = props.rotation * Math.PI / 180;
     }
-  };
+  };*/
 
   p.draw = function () {
-    p.background(100);
-    p.noStroke();
-    p.push();
-    p.rotateY(rotation);
-    p.box(100);
-    p.pop();
+    console.log(video.get(40,20));
   };
 };
 
