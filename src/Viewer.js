@@ -17,7 +17,7 @@ export function sketch (p) {
   let video;
 
   p.setup = function () {
-    let canvas = p.createCanvas(1, 1);
+    let canvas = p.createCanvas(0,0);
     //canvas.parent('root');
     video = p.createCapture({
       audio: false,
