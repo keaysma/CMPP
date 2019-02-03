@@ -11,6 +11,14 @@ import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom";
 
 var cam;
 var points;
+var tune = [
+	{base: 82.41, max: 82.40},		//E2
+	{base: 196.00, max: 196.00},	//G3
+	{base: 130.81, max: 130.80},	//C3
+	{base: 0, max: 10},
+	{base: 0, max: 10},
+	{base: 0, max: 10}
+];
 
 class AvCanvas extends Component {
   constructor(props){
@@ -27,17 +35,24 @@ class AvCanvas extends Component {
   }
 
   initiateBoxes() {
-    const waveTypes = ['sine', 'triangle', 'sawtooth', 'square'];
+    const waveTypes = ['sine', 'triangle', 'sawtooth'];
     let boxes = []
-    for (let index = 0; index < 6/*this.state.jukeboxes.length*/; index++) {
+    for (let index = 0; index < 3/*this.state.jukeboxes.length*/; index++) {
       let currbox = {box: jukebox(), rgba: points[index]}
       currbox.box.setType = waveTypes[Math.floor(Math.random()*waveTypes.length)];
       currbox.box.start();
       boxes.push(currbox);
     }
-    /*this.setState((state) => {return {
-			test:5//jukeboxes:boxes
-    }});*/
+	/*for (let index = 3; index < 6; index ++){
+      let currbox = {box: jukebox(), rgba: points[index]}
+      currbox.box.setType = waveTypes[Math.floor(Math.random()*waveTypes.length)];
+      currbox.box.freq(10);
+	  currbox.box.amp(200);
+	  currbox.box.disconnect();
+	  currbox.box.start();
+	  boxes[index-3].box.freq(currbox.box);
+      boxes.push(currbox);
+	}*/
 	this.state = {jukeboxes : boxes};
 	console.log(this.state);
   }
@@ -56,7 +71,7 @@ class AvCanvas extends Component {
       for (let index = 0; index < this.state.jukeboxes.length; index++) {
         const box = this.state.jukeboxes[index];
         box.rgba = cam.get(points[index].x, points[index].y, 1, 1);
-        let x = 440 + (606.5*((box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255)));
+        let x = tune[index]['base'] + (tune[index]['max']*((box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255)));
         box.box.freq(x);
       }
       //console.log(this.state.jukeboxes);
@@ -117,13 +132,12 @@ export function sketch (p) {
 
     //pixels drawn on canvas using image function remains static and inverted(filter);
     p.image(cam,0,0,1200,1000);
-    // p.ellipse(100,100,200,200);
     // p.ellipse(400,400,200,200);
     for (let index = 0; index < points.length; index++) {
       const point = points[index];
       p.ellipse(point.x, point.y, point.radius, point.radius)
     }
-    p.filter(p.INVERT);
+    //p.filter(p.INVERT);
   };
   p.mousePressed = () => {
     if (points.length > 0) {

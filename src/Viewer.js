@@ -11,9 +11,9 @@ class Viewer extends Component {
         { x: 50, y: 50, radius: 10, color:' #000', active: false },
         { x: 150, y: 50, radius: 10, color:' #000', active: false },
         { x: 250, y: 50, radius: 10, color:' #000', active: false },
-        { x: 50, y: 150, radius: 10, color:' #000', active: false },
-        { x: 150, y: 150, radius: 10, color:' #000', active: false },
-        { x: 250, y: 150, radius: 10, color:' #000', active: false }
+        { x: 50, y: 150, radius: 5, color:' #F00', active: false },
+        { x: 150, y: 150, radius: 5, color:' #F00', active: false },
+        { x: 250, y: 150, radius: 5, color:' #F00', active: false }
       ],
     }
   }
