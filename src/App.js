@@ -25,7 +25,7 @@ class App extends Component {
 	};
 
 	//Frequency modulation
-	/*this.car = jukebox();
+	this.car = jukebox();
 	this.car.setType('square');
 	this.car.amp(0);
 	this.car.freq(220);
@@ -37,7 +37,7 @@ class App extends Component {
 	this.mod.start();
 	this.mod.disconnect();
 	this.car.freq(this.mod);
-	this.car.amp(0.5);*/
+	this.car.amp(0.5);
 
 	this.o = jukebox();
 	this.o2 = jukebox();
@@ -59,9 +59,9 @@ class App extends Component {
 	  this.setState((state) => {return {point: x}})
 	  console.log(p2);
 	  //For fancy modulation
-	  //this.mod.setType(((p[0] + p[1] + p[2])/(3*255)) > 0.5 ? 'sine' : 'sawtooth');
-	  ////this.mod.freq(10*((p[0]+p[1]+p[2])/(3*255)));
-	  //this.car.freq(x2);
+	  this.mod.setType(((firstSlider.value() + secondSlider.value() + thirdSlider.value())/(3*255)) > 0.5 ? 'sine' : 'sawtooth');
+	  this.mod.freq(10*((firstSlider.value()+secondSlider.value()+thirdSlider.value())/(3*255)));
+	  this.car.freq(fourthSlider.value());
 	  this.o.freq(x);
 	  this.o2.freq(x2);
 	}
@@ -93,16 +93,16 @@ export function sketch (p) {
 	cam.size(p.windowWidth, p.windowHeight);
 	cam.position((p.windowWidth)/8,0);
   
-  firstSlider = p.createSlider(0, 100, 45);
+  firstSlider = p.createSlider(-1000, 1000, 45);
   firstSlider.position(30,50);
   firstSlider.size(250);
-  secondSlider = p.createSlider(0, 100, 45);
+  secondSlider = p.createSlider(-1000, 1000, 45);
   secondSlider.position(30,150);
   secondSlider.size(250);
-  thirdSlider = p.createSlider(0, 100, 45);
+  thirdSlider = p.createSlider(-1000, 1000, 45);
   thirdSlider.position(30,250);
   thirdSlider.size(250);
-  fourthSlider = p.createSlider(0, 100, 45);
+  fourthSlider = p.createSlider(-1000, 1000, 45);
   fourthSlider.position(30,350);
   fourthSlider.size(250);
   };
@@ -120,6 +120,8 @@ export function sketch (p) {
     p.rotateY(rotation);
     //p.box(100);
 		p.pop();
+
+		//p.text('AUX 1', p.displayWidth * 0.25, 100);
 		
 		// sidebar.background(255, 204, 0);
     // sidebar.noStroke();
