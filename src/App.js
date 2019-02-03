@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import P5Wrapper from 'react-p5-wrapper';
-import p5 from 'p5';
-import logo from './assets/logo.svg';
-// import P5Wrapper from 'react-p5-wrapper';
-// import logo from './assets/logo.svg';
-import './static/App.css';
 import Viewer from './Viewer';
 import { Noiser, jukebox } from './Noiser';
 import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom";
+import AvCanvas from './AvCanvas'
 
 var cam;
 var firstSlider, secondSlider, thirdSlider, fourthSlider;
@@ -66,68 +61,15 @@ class App extends Component {
 	  this.o2.freq(x2);
 	}
   }
-
-  render() {
-    return (
-		<div>
-		<P5Wrapper sketch={sketch} />
-		</div>
-    );
-  }
-}
-
-export function sketch (p) {
-  let rotation = 0;
-
-  p.setup = function () {
-		p.createCanvas(0, 0);
-		sidebar = p.createGraphics(100,p.windowHeight);
-    sidebar.position(0,0);
-    //cam = p.createCapture(p5.VIDEO);
-    cam = p.createCapture({
-		audio: false,
-		video: {
-			facingMode: "user"
-		}
-	});
-	cam.size(p.windowWidth, p.windowHeight);
-	cam.position((p.windowWidth)/8,0);
-  
-  firstSlider = p.createSlider(-1000, 1000, 45);
-  firstSlider.position(30,50);
-  firstSlider.size(250);
-  secondSlider = p.createSlider(-1000, 1000, 45);
-  secondSlider.position(30,150);
-  secondSlider.size(250);
-  thirdSlider = p.createSlider(-1000, 1000, 45);
-  thirdSlider.position(30,250);
-  thirdSlider.size(250);
-  fourthSlider = p.createSlider(-1000, 1000, 45);
-  fourthSlider.position(30,350);
-  fourthSlider.size(250);
-  };
-
-  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    if (props.rotation){
-      rotation = props.rotation * Math.PI / 180;
-    }
-  };
-
-  p.draw = function () {
-    p.background(100);
-    p.noStroke();
-    p.push();
-    p.rotateY(rotation);
-    //p.box(100);
-		p.pop();
-
-		//p.text('AUX 1', p.displayWidth * 0.25, 100);
-		
-		// sidebar.background(255, 204, 0);
-    // sidebar.noStroke();
-    // p.image(sidebar, 50, 50);
-    // p.image(sidebar, 0, 0, 50, 50);
-  };
 };
 
-export default App;
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <Viewer />
+        {/* <AvCanvas /> */}
+      </div>
+    )
+  }
+}
