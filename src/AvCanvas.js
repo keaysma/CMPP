@@ -15,65 +15,31 @@ var points;
 class AvCanvas extends Component {
   constructor(props){
     super(props);
+	this.initiateBoxes = this.initiateBoxes.bind(this);
+
     points = this.props.points;
-
     this.state = {
-      // x: 0,
-      // y: 0,
-      // x2: 150,
-      // y2: 150,
-
-      // points: [
-      //   { x: 50, y: 50, radius: 10, color:' #000', active: false },
-      //   { x: 150, y: 50, radius: 10, color:' #000', active: false },
-      //   { x: 250, y: 50, radius: 10, color:' #000', active: false },
-      //   { x: 50, y: 150, radius: 10, color:' #000', active: false },
-      //   { x: 150, y: 150, radius: 10, color:' #000', active: false },
-      //   { x: 250, y: 150, radius: 10, color:' #000', active: false }
-      // ],
-
-      jukeboxes: [
-        // { box: jukebox(), rgba: points[0] },
-        // { box: jukebox(), rgba: points[1] },
-        // { box: jukebox(), rgba: points[2] },
-        // { box: jukebox(), rgba: points[3] },
-        // { box: jukebox(), rgba: points[4] },
-        // { box: jukebox(), rgba: points[5] },
-      ]
+      jukeboxes: []
     };
     this.initiateBoxes();
-    // this.jukeboxes = initiateBoxes();
-    // this.o = jukebox();
-    // this.o2 = jukebox();
-    // this.o2.setType('sine');
-    // this.o.start();
-    // this.o2.start();
     this.updatePixels = this.updatePixels.bind(this);
     this.timer = setInterval(() => this.updatePixels(), 0.01);
   }
 
   initiateBoxes() {
-    // let boxes = [];
     const waveTypes = ['sine', 'triangle', 'sawtooth', 'square'];
-    for (let index = 0; index < this.state.jukeboxes.length; index++) {
-    // this.state.jukeboxes.forEach(box => {
-      let boxes = this.state.jukeboxes;//[index];
-      let currbox = {}  //fill in
+    let boxes = []
+    for (let index = 0; index < 6/*this.state.jukeboxes.length*/; index++) {
+      let currbox = {box: jukebox(), rgba: points[index]}
       currbox.box.setType = waveTypes[Math.floor(Math.random()*waveTypes.length)];
       currbox.box.start();
-      boxes.append(currbox); //fix
-      this.setState((state) => {return {
-        jukeboxes:state.jukeboxes
-      }})
+      boxes.push(currbox);
     }
-      // let juke = { box: jukebox() };
-      // juke.tuning = this.state.tunings[index];
-      
-      // boxes.push(juke);
-    // }
-    // console.log('boxes: ' + boxes);
-    
-    // return boxes;
+    /*this.setState((state) => {return {
+			test:5//jukeboxes:boxes
+    }});*/
+	this.state = {jukeboxes : boxes};
+	console.log(this.state);
   }
 
   updatePixels(){
@@ -89,11 +55,11 @@ class AvCanvas extends Component {
       // });
       for (let index = 0; index < this.state.jukeboxes.length; index++) {
         const box = this.state.jukeboxes[index];
-        box.rgba = cam.get(points[index].x, points[index].y, points[index].x + 1, points[index].y + 1);
+        box.rgba = cam.get(points[index].x, points[index].y, 1, 1);
         let x = 440 + (606.5*((box.rgba[0] + box.rgba[1] + box.rgba[2])/(3*255)));
         box.box.freq(x);
       }
-      console.log(this.state.jukeboxes);
+      //console.log(this.state.jukeboxes);
       
       // this.setState((state) => {return {point: x}})
       // console.log(p2);
