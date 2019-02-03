@@ -26,6 +26,7 @@ export function sketch (p) {
       }
     });
     video.size(p.windowWidth, p.windowHeight);
+    video.position(0,0);
   };
 
   /*p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
@@ -33,6 +34,10 @@ export function sketch (p) {
       rotation = props.rotation * Math.PI / 180;
     }
   };*/
+
+  p.windowResized = function () {
+    resizeCanvas(windowWidth, windowHeight);
+  }
 
   p.draw = function () {
     console.log(video.get(40,20));
