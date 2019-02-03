@@ -46,26 +46,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-		  <button onClick={() => this.o.amp(0)}>F</button>
-		  <button onClick={() => this.o.amp(1)}>Fnt</button>
-        </header>
-        <Viewer />
+		<div>
 		<P5Wrapper sketch={sketch} />
-      </div>
+		</div>
     );
   }
 }
@@ -74,9 +57,15 @@ export function sketch (p) {
   let rotation = 0;
 
   p.setup = function () {
-    p.createCanvas(100, 100,);
-    cam = p.createCapture(p5.VIDEO);
-	//cam.hide();
+    p.createCanvas(0, 0);
+    //cam = p.createCapture(p5.VIDEO);
+    cam = p.createCapture({
+		audio: false,
+		video: {
+			facingMode: "user"
+		}
+	});
+	cam.size(p.windowWidth, p.windowHeight);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {

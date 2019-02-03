@@ -40,7 +40,7 @@ export function sketch (p) {
     console.log(video.get(40,20));
   };
 };
-
+/*
 export function sketch (p) {
   let rotation = 0;
 
@@ -63,6 +63,6 @@ export function sketch (p) {
     p.box(100);
     p.pop();
   };
-};
+};*/
 
 export default Viewer;
