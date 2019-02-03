@@ -8,25 +8,25 @@ class Noiser extends Component {
   constructor(){
     super();
   	this.soundStateChange = this.soundStateChange.bind(this);
-	this.freqChange = this.freqChange.bind(this);
-	this.state = {
-		freq: 440,
-		vol: 1.0,
-	};
-	this.o = jukebox();
-	this.o.start();
+    this.freqChange = this.freqChange.bind(this);
+    this.state = {
+      freq: 440,
+      vol: 1.0,
+    };
+    this.o = jukebox();
+    this.o.start();
   }
-  soundStateChange(){
-	this.setState((state) => {
-	  return {vol: 1 - state.vol}
-	});
-	this.o.amp(this.state.vol);
+  soundStateChange() {
+    this.setState((state) => {
+      return {vol: 1 - state.vol}
+    });
+    this.o.amp(this.state.vol);
   }
   freqChange(event) {
-	event.preventDefault();
-	console.log(event);
+    event.preventDefault();
+    console.log(event);
     this.setState({freq: event.target.valueAsNumber});
-	this.o.freq(this.state.freq);
+    this.o.freq(this.state.freq);
   }
 
   render() {
@@ -34,7 +34,7 @@ class Noiser extends Component {
       <div className="App">
         <P5Wrapper sketch={sketch} />
 	    <input id="typeinp" type="range" min="420" max="1567.98" value={this.state.freq} onChange={(e) => this.freqChange(e)} step="1"/>
-		<button onClick={this.soundStateChange}>I/O</button>
+      <button onClick={this.soundStateChange}>I/O</button>
       </div>
     );
   }
