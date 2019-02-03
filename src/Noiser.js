@@ -66,7 +66,7 @@ export function sketch (p) {
 export function jukebox(p){
 	var o;
 	o = new p5.Oscillator();
-	o.setType('sine');
+	o.setType('sawtooth');
 	o.freq(440);
 	o.amp(0.8);
 	return o;
