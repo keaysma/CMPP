@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import crosshair from './assets/crosshair.png';
-// import P5Wrapper from 'react-p5-wrapper';
-// const crosshair = require('./assets/crosshair.png');
-// import p5 from 'p5';
-// import * as p5 from 'p5';
 import P5Wrapper from 'react-p5-wrapper';
 import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom.js";
 import AvCanvas from './AvCanvas';
