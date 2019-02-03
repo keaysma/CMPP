@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import * as p5 from 'p5';
-import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom.js";
+import p5 from 'p5';
+import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom";
 // import "./Draggable";
 // import Draggable from './Draggable';
 
@@ -9,7 +9,7 @@ class Viewer extends Component {
   render() {
     return (
       <div className="Viewer">
-        <P5Wrapper sketch={sketch} image={crosshair} />
+        <P5Wrapper sketch={sketch} />
         {/* <img src={crosshair} height="50" width="50" alt='X' /> */}
       </div>
     );
