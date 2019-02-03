@@ -10,6 +10,8 @@ import { Noiser, jukebox } from './Noiser';
 import "react-p5-wrapper/node_modules/p5/lib/addons/p5.dom";
 
 var cam;
+var firstSlider, secondSlider, thirdSlider, fourthSlider;
+var sidebar;
 
 class App extends Component {
   constructor(props){
@@ -78,7 +80,9 @@ export function sketch (p) {
   let rotation = 0;
 
   p.setup = function () {
-    p.createCanvas(0, 0);
+		p.createCanvas(0, 0);
+		sidebar = p.createGraphics(100,p.windowHeight);
+    sidebar.position(0,0);
     //cam = p.createCapture(p5.VIDEO);
     cam = p.createCapture({
 		audio: false,
@@ -87,6 +91,20 @@ export function sketch (p) {
 		}
 	});
 	cam.size(p.windowWidth, p.windowHeight);
+	cam.position((p.windowWidth)/8,0);
+  
+  firstSlider = p.createSlider(0, 100, 45);
+  firstSlider.position(30,50);
+  firstSlider.size(250);
+  secondSlider = p.createSlider(0, 100, 45);
+  secondSlider.position(30,150);
+  secondSlider.size(250);
+  thirdSlider = p.createSlider(0, 100, 45);
+  thirdSlider.position(30,250);
+  thirdSlider.size(250);
+  fourthSlider = p.createSlider(0, 100, 45);
+  fourthSlider.position(30,350);
+  fourthSlider.size(250);
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
@@ -101,7 +119,12 @@ export function sketch (p) {
     p.push();
     p.rotateY(rotation);
     //p.box(100);
-    p.pop();
+		p.pop();
+		
+		// sidebar.background(255, 204, 0);
+    // sidebar.noStroke();
+    // p.image(sidebar, 50, 50);
+    // p.image(sidebar, 0, 0, 50, 50);
   };
 };
 
